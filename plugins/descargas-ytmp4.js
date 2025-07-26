@@ -64,12 +64,12 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       `> 🔗 *𝑳𝒊𝒏𝒌:* ${url}\n\n` +
       ` *➭ 𝑬𝒍 𝒗𝒊𝒅𝒆𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
-    await conn.sendMessage(m.chat, {
+    /*await conn.sendMessage(m.chat, {
       image: { url: thumbnail },
       caption: textoInfo
-    }, { quoted: m });
+    }, { quoted: m });*/
     
-    //await conn.sendFile(m.chat, thumbnail, 'ytmp4.jpg', textoInfo, m);
+    await conn.sendFile(m.chat, thumbnail, 'ytmp4.jpg', textoInfo, m, fake);
 
     await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', m);
     m.react('✅');

@@ -32,7 +32,7 @@ const handler = async (m, { conn, text, command }) => {
 
     const thumbnailBuffer = await (await fetch(thumbnail)).buffer();
 
-    await conn.sendFile(m.chat, thumbnailBuffer, 'ytmp3.jpg', textoInfo, m);
+    await conn.sendFile(m.chat, thumbnailBuffer, 'ytmp3.jpg', textoInfo, m, fake);
 
     const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
     const res = await fetch(api);
