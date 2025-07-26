@@ -40,7 +40,7 @@ const handler = async (m, { conn, text }) => {
       contextInfo: {
         externalAdReply: {
           title: audio.title,
-          body: `Descargado desde SoundCloud`,
+          body: `Dᴇsᴄᴀʀɢᴀ ᴄᴏᴍᴘʟᴇᴛᴀ . sᴜᴋᴜɴᴀ ᴍᴅ`,
           thumbnailUrl: image,
           mediaType: 1,
           renderLargerThumbnail: true

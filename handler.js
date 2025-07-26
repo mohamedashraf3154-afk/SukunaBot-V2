@@ -5,6 +5,7 @@ import path, { join } from 'path'
 import { unwatchFile, watchFile } from 'fs'
 import chalk from 'chalk'
 import fetch from 'node-fetch'
+import getMensajeSistema from './lib/msmwarning.js'
 
 const { proto } = (await import('@whiskeysockets/baileys')).default
 const isNumber = x => typeof x === 'number' && !isNaN(x)
@@ -538,48 +539,35 @@ if (!m.fromMe) return this.sendMessage(m.chat, { react: { text: emot, key: m.key
 function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}
 }}
 
-global.dfail = (type, m, conn) => {
-
+global.dfail = (type, m, conn, comando = '') => {
   let edadaleatoria = ['10', '28', '20', '40', '18', '21', '15', '11', '9', '17', '25'].getRandom();
   let user2 = m.pushName || 'Anónimo';
   let verifyaleatorio = ['registrar', 'reg', 'verificar', 'verify', 'register'].getRandom();
+  let mensajes = getMensajeSistema(comando)
 
   const msg = {
-  rowner: `🚫 \`𝗘𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝘀𝗼𝗹𝗼 𝗽𝘂𝗲𝗱𝗲 𝘀𝗲𝗿 𝘂𝘀𝗮𝗱𝗼 𝗽𝗼𝗿 𝗺𝗶 𝗰𝗿𝗲𝗮𝗱𝗼𝗿, 𝘁𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗻𝗼 𝗲𝘀𝘁𝗮 𝗮𝘂𝘁𝗼𝗿𝗶𝘇𝗮𝗱𝗼\``,
+    rowner: mensajes.smsrowner,
+    owner: mensajes.smsowner,    
+    mods: mensajes.smsmods,  
+    premium: mensajes.smspremium,  
+    group: mensajes.smsgroup,  
+    admin: mensajes.smsadmin,
+    private: mensajes.smsprivate,
+    botAdmin: mensajes.smsbotAdmin,  
+    unreg: `  ⬣〔 🚫 𝐀𝐂𝐂𝐄𝐒𝐎 𝐃𝐄𝐍𝐄𝐆𝐀𝐃𝐎 ❗ 〕⬣  
   
-  owner: `🚫 \`𝗘𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝘀𝗼𝗹𝗼 𝗽𝘂𝗲𝗱𝗲 𝘀𝗲𝗿 𝘂𝘀𝗮𝗱𝗼 𝗽𝗼𝗿 𝗹𝗼𝘀 𝗱𝗲𝘀𝗮𝗿𝗿𝗼𝗹𝗹𝗮𝗱𝗼𝗿𝗲𝘀 𝗱𝗲𝗹 𝗯𝗼𝘁, 𝗻𝗼 𝘁𝗶𝗲𝗻𝗲𝘀 𝗽𝗲𝗿𝗺𝗶𝘀𝗼𝘀 𝗻𝗲𝗰𝗲𝘀𝗮𝗿𝗶𝗼𝘀.\``,
-  
-  mods: `🚫 \`𝗦𝗼𝗹𝗼 𝗹𝗼𝘀 𝗱𝗲𝘀𝗮𝗿𝗿𝗼𝗹𝗹𝗮𝗱𝗼𝗿𝗲𝘀 𝗮𝘂𝘁𝗼𝗿𝗶𝘇𝗮𝗱𝗼𝘀 𝗽𝘂𝗲𝗱𝗲𝗻 𝗲𝗷𝗲𝗰𝘂𝘁𝗮𝗿 𝗲𝘀𝘁𝗮 𝗳𝘂𝗻𝗰𝗶𝗼𝗻.\``,
-  
-  premium: `🧙‍♂️ \`𝙀𝙨𝙩𝙖 𝙛𝙪𝙣𝙘𝙞𝙤𝙣 𝙚𝙨𝙩𝙖 𝙙𝙞𝙨𝙥𝙤𝙣𝙞𝙗𝙡𝙚 𝙪𝙣𝙞𝙘𝙖𝙢𝙚𝙣𝙩𝙚 𝙥𝙖𝙧𝙖 𝙪𝙨𝙪𝙖𝙧𝙞𝙤𝙨 𝙥𝙧𝙚𝙢𝙞𝙪𝙢.`,
-  
-  group: `⁉️ \`𝗘𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝘀𝗼𝗹𝗼 𝘀𝗲 𝗽𝘂𝗲𝗱𝗲 𝘂𝘀𝗮𝗿 𝗲𝗻 𝗴𝗿𝘂𝗽𝗼𝘀.\``,
-  
-  private: `🔒 \`𝗘𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝘀𝗼𝗹𝗼 𝗽𝘂𝗲𝗱𝗲 𝘀𝗲𝗿 𝘂𝘀𝗮𝗱𝗼 𝗲𝗻 𝗲𝗹 𝗰𝗵𝗮𝘁 𝗽𝗿𝗶𝘃𝗮𝗱𝗼 𝗱𝗲𝗹 𝗯𝗼𝘁.\``,
-  
-  admin: `💎 \`𝗘𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝘀𝗼𝗹𝗼 𝗲𝘀𝘁𝗮 𝗿𝗲𝘀𝗲𝗿𝘃𝗮𝗱𝗼 𝗽𝗮𝗿𝗮 𝗮𝗱𝗺𝗶𝗻𝗶𝘀𝘁𝗿𝗮𝗱𝗼𝗿𝗲𝘀 𝗱𝗲𝗹 𝗴𝗿𝘂𝗽𝗼.\``,
-  
-  botAdmin: `🎄 \`𝗣𝗮𝗿𝗮 𝗲𝗷𝗲𝗰𝘂𝘁𝗮𝗿 𝗲𝗹 𝗰𝗼𝗺𝗮𝗻𝗱𝗼 𝗱𝗲𝗯𝗼 𝘀𝗲𝗿 𝗮𝗱𝗺𝗶𝗻𝗶𝘀𝘁𝗿𝗮𝗱𝗼𝗿 𝗱𝗲𝗹 𝗴𝗿𝘂𝗽𝗼.\``,
-  
-  unreg: `╭━━━〔 🚫 𝐀𝐂𝐂𝐄𝐒𝐎 𝐃𝐄𝐍𝐄𝐆𝐀𝐃𝐎 ❗ 〕━━⬣  
-┃  
-┃ 📛 *ＵＳＵＡＲＩＯ 𝐍𝐎 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐃𝐎*  
-┃  
-┃ 🎄 𝐄𝐋 𝐂𝐎𝐌𝐀𝐍𝐃𝐎 「 *${comando}* 」  
-┃     *Ｓ𝐎𝐋𝐎 𝐏𝐔𝐄𝐃𝐄 𝐔𝐒𝐀𝐑𝐋𝐎 𝐔𝐍 𝐔𝐒𝐔𝐀𝐑𝐈𝐎 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐃𝐎.*  
-┃  
-┃ 🔐 *¿𝐂Ó𝐌𝐎 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑𝐓𝐄?*  
-┃ 🌴 Usa: *.reg nombre.edad*  
-┃  
-┃ ☄️ 𝐔𝐓𝐈𝐋𝐈𝐙𝐀 𝐑Á𝐏𝐈𝐃𝐎:  
-┃ ➥ *#${verifyaleatorio} ${user2}.${edadaleatoria}*  
-┃  
-╰━━━━━━━━━━━━━━━━━━━━⬣`,
-  
-  restrict: `『✦』𝑬𝒔𝒕𝒂 𝒄𝒂𝒓𝒂𝒄𝒕𝒆𝒓𝒊𝒔𝒕𝒊𝒄𝒂 𝒆𝒔𝒕𝒂 𝒅𝒆𝒔𝒂𝒄𝒕𝒊𝒗𝒂𝒅𝒂.`
-}[type];
+> Para usar el comando *${comando} debes estar registrado* 
 
-  if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'));}
+🔐 *¿𝐂Ó𝐌𝐎 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑𝐓𝐄?*  
+🌴 Usa: *.reg nombre.edad*  
+ 
+☄️ 𝐔𝐓𝐈𝐋𝐈𝐙𝐀 𝐑Á𝐏𝐈𝐃𝐎:  
+ ➥ *#${verifyaleatorio} ${user2}.${edadaleatoria}*`,
+    restrict: mensajes.smsrestrict
+  }[type]
+
+  if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
+}
 
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {

@@ -92,7 +92,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
         if (!json.status) throw '❌ No se pudo obtener el audio.';
 
-        await conn.sendFile(m.chat, json.download, 'audio.mp3', `🎧 *Título:* ${json.title}\n📥 *Audio descargado con éxito.*`, m);
+        await conn.sendFile(m.chat, json.download, 'audio.mp3', `🎧 *Título:* ${json.title}\n📥 *Audio descargado con éxito.*`, m, fake);
 
       } else if (command === 'ytmp44') {
         const res = await fetch(`https://dark-core-api.vercel.app/api/download/ytmp4/v2?key=api&url=${encodeURIComponent(text)}`);
@@ -100,7 +100,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
         if (!json.download) throw '❌ No se pudo obtener el video.';
 
-        await conn.sendFile(m.chat, json.download, 'video.mp4', `🎬 *Título:* ${json.title}\n📽️ *Calidad:* ${json.quality}p\n📥 *Video descargado con éxito.*`, m);
+        await conn.sendFile(m.chat, json.download, 'video.mp4', `🎬 *Título:* ${json.title}\n📽️ *Calidad:* ${json.quality}p\n📥 *Video descargado con éxito.*`, m, fake);
       }
 
     } catch (e) {

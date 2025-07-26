@@ -21,21 +21,20 @@ const handler = async (m, { conn, text, command }) => {
     const canal = author?.name || 'Desconocido';
     const vistas = views.toLocaleString();
 
-    const textoInfo = `╭━━〔 *⛩️  YOUTUBE - MP3 🌪️* 〕━━⬣\n`
-      + `┃ ✦🌾 *Título:* ${title}\n`
-      + `┃ ✦⏱️ *Duración:* ${timestamp}\n`
-      + `┃ ✦🍰 *Canal:* ${canal}\n`
-      + `┃ ✦🌧️ *Vistas:* ${vistas}\n`
-      + `┃ ✦🌳 *Publicado:* ${ago}\n`
-      + `┃ ✦🔗 *Enlace:* ${url}\n`
-      + `╰━━━━━━━━━━━━━━━━━━⬣\n\n> *➭ El audio se está enviando, espera un momento...*`;
+    const textoInfo = ` ⬣ *🎲  \`YOUTUBE - MP3\` 🇦🇱* ⬣\n\n`
+      + `> 🌾 *𝑻𝒊𝒕𝒖𝒍𝒐:* ${title}\n`
+      + `> ⏱️ *𝑫𝒖𝒓𝒂𝒄𝒊𝒐𝒏:* ${timestamp}\n`
+      + `> 🍰 *𝑪𝒂𝒏𝒂𝒍:* ${canal}\n`
+      + `> 🌧️ *𝑽𝒊𝒔𝒕𝒂𝒔:* ${vistas}\n`
+      + `> 🌳 *𝑽𝒊𝒔𝒕𝒂𝒔:* ${ago}\n`
+      + `> 🔗 *𝑳𝒊𝒏𝒌:* ${url}\n\n`
+      + ` *➭ 𝑬𝒍 𝒂𝒖𝒅𝒊𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
     const thumbnailBuffer = await (await fetch(thumbnail)).buffer();
 
     await conn.sendFile(m.chat, thumbnailBuffer, 'ytmp3.jpg', textoInfo, m);
 
-   // const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
-    const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=diamond`;
+    const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
     const res = await fetch(api);
     const json = await res.json();
 
@@ -71,6 +70,6 @@ const handler = async (m, { conn, text, command }) => {
 
 handler.command = ['ytmp3'];
 handler.tags = ['descargas'];
-handler.help = ['ytmp3 <nombre o link>'];
+handler.help = ['ytmp3 *<link>*'];
 
 export default handler;

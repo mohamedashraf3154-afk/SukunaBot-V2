@@ -22,15 +22,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const vistas = formatViews(views);
     const canal = author.name || 'Desconocido';
 
-    const infoMessage = `╭━〔 乂 YOUTUBE - PLAY 〕━⬣
+    const infoMessage = `
 ≡ 🎄 *\`Titulo:\`* ${title}
 
 ≡ 🌵 *\`Duración:\`* ${timestamp}
 ≡ 🌿 *\`Canal:\`* ${canal}
 ≡ 🍁 *\`Vistas:\`* ${vistas}
 ≡ 🌳 *\`Publicado:\`* ${ago}
-≡ 🔗 *\`Link:\`* ${url}
-╰━━━━━━━━━━━━⬣`;
+≡ 🔗 *\`Link:\`* ${url}`;
 
     const thumb = (await conn.getFile(thumbnail))?.data;
 
@@ -54,7 +53,8 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (command === 'mp3' || command === 'playaudio') {
       try {
-        const apiAudioUrl = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
+
+        const apiAudioUrl = `https://dark-core-api.vercel.app/api/download/YTMP3?key=api&url=${url}`;
         const res = await fetch(apiAudioUrl);
         const json = await res.json();
         const { title, dl } = json.data;
@@ -75,7 +75,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     else if (command === 'mp4' || command === 'playvideo') {
       try {
-        const apiVideoUrl = `https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=diamond`;
+        const apiVideoUrl = `https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=stellar-7SQpl4Ah`;
         const res = await fetch(apiVideoUrl);
         const json = await res.json();
         const { title, dl } = json.data;

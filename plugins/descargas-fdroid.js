@@ -1,5 +1,3 @@
-// Código mejorado por Black.OFC 🔥
-
 import axios from 'axios';
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
@@ -19,7 +17,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
     const packageName = inputUrl.split('/').filter(x => x.includes('.')).pop() || 'app';
     const appNameRaw = data.name || data.title || packageName;
-    const appName = appNameRaw.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_'); // Limpia caracteres raros
+    const appName = appNameRaw.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
     const versionName = data.version || '1.0';
     const fileName = `${appName}_v${versionName}.apk`;
 

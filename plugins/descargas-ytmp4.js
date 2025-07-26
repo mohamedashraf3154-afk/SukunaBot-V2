@@ -54,23 +54,24 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
 
 
     const textoInfo =
-      `╭━━━〔 *⛩️ YOUTUBE - MP4 🌪️* 〕━━⬣\n` +
-      `┃ 📌 *Título:* ${title}\n` +
-      `┃ ⏱️ *Duración:* ${timestamp}\n` +
-      `┃ 🧑‍🏫 *Canal:* ${canal}\n` +
-      `┃ 👁️ *Vistas:* ${vistas}\n` +
-      `┃ 🗓️ *Publicado:* ${ago}\n` +
-      `┃ 💾 *Tamaño:* ${sizeStr}\n` +
-      `┃ 🔗 *Enlace:* ${url}\n` +
-      `╰━━━━━━━━━━━━━━━━━━━━⬣\n\n` +
-      `> *➭ El video se está enviando, espera un momento...*`;
+      ` ⬣ *🎲  \`YOUTUBE - MP4\` 🇦🇱* ⬣\n\n` +
+      `> 📌 *𝑻𝒊𝒕𝒖𝒍𝒐:* ${title}\n` +
+      `> ⏱️ *𝑫𝒖𝒓𝒂𝒄𝒊𝒐𝒏:* ${timestamp}\n` +
+      `> 🧑‍🏫 *𝑪𝒂𝒏𝒂𝒍:* ${canal}\n` +
+      `> 👁️ *𝑽𝒊𝒔𝒕𝒂𝒔:* ${vistas}\n` +
+      `> 🗓️ *𝑷𝒖𝒃𝒍𝒊𝒄𝒂𝒅𝒐:* ${ago}\n` +
+      `> 💾 *𝑻𝒂𝒎𝒂𝒏̃𝒐:* ${sizeStr}\n` +
+      `> 🔗 *𝑳𝒊𝒏𝒌:* ${url}\n\n` +
+      ` *➭ 𝑬𝒍 𝒗𝒊𝒅𝒆𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
     await conn.sendMessage(m.chat, {
       image: { url: thumbnail },
       caption: textoInfo
     }, { quoted: m });
+    
+    //await conn.sendFile(m.chat, thumbnail, 'ytmp4.jpg', textoInfo, m);
 
-    await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '', m);
+    await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', m);
     m.react('✅');
 
   } catch (e) {

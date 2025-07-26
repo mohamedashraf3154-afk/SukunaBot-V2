@@ -1,48 +1,62 @@
-import FormData from "form-data"
-import Jimp from "jimp"
-const handler = async (m, {conn, usedPrefix, command}) => {
-  try {    
-  await m.react('🕓')
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || q.mediaType || ""
-  if (!mime) return conn.reply(m.chat, `❀ Por favor, envie una imagen o responda a la imagen utilizando el comando.`, m)
-  if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`✧ El formato del archivo (${mime}) no es compatible, envía o responde a una imagen.`)
-  conn.reply(m.chat, `✧ Mejorando la calidad de la imagen....`, m)  
-  let img = await q.download?.()
-  let pr = await remini(img, "enhance")
-  await conn.sendFile(m.chat, pr, 'thumbnail.jpg', listo, m, null)
-  await m.react('✅')
-  } catch {
-  await m.react('✖️')
-}}
-handler.help = ["hd"]
-handler.tags = ["tools"]
-handler.command = ["remini", "hd", "enhance"]
+import fetch from 'node-fetch';
 
-export default handler
+const handler = async (m, { conn, usedPrefix, command }) => {
+    try {
+        let q = m.quoted ? m.quoted : m;
+        let mime = (q.msg || q).mimetype || q.mediaType || "";
 
-async function remini(imageData, operation) {
-  return new Promise(async (resolve, reject) => {
-    const availableOperations = ["enhance", "recolor", "dehaze"]
-    if (availableOperations.includes(operation)) {
-      operation = operation
-    } else {
-      operation = availableOperations[0]
-    }
-    const baseUrl = "https://inferenceengine.vyro.ai/" + operation + ".vyro"
-    const formData = new FormData()
-    formData.append("image", Buffer.from(imageData), {filename: "enhance_image_body.jpg", contentType: "image/jpeg"})
-    formData.append("model_version", 1, {"Content-Transfer-Encoding": "binary", contentType: "multipart/form-data; charset=utf-8"})
-    formData.submit({url: baseUrl, host: "inferenceengine.vyro.ai", path: "/" + operation, protocol: "https:", headers: {"User-Agent": "okhttp/4.9.3", Connection: "Keep-Alive", "Accept-Encoding": "gzip"}},
-      function (err, res) {
-        if (err) reject(err);
-        const chunks = [];
-        res.on("data", function (chunk) {chunks.push(chunk)});
-        res.on("end", function () {resolve(Buffer.concat(chunks))});
-        res.on("error", function (err) {
-        reject(err);
+        if (!mime) return m.reply(`${emoji} Por favor, responda a una imagen para aumentar el *HD*.`);
+        if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`${emoji2} El formato del archivo (${mime}) no es compatible, envía o responde a una imagen.`);
+
+        conn.reply(m.chat, `${emoji2} Mejorando la calidad de la imagen....`, m, {
+            contextInfo: { externalAdReply: { 
+                mediaUrl: null, 
+                mediaType: 1, 
+                showAdAttribution: true,
+                title: packname,
+                body: wm,
+                previewType: 0, 
+                thumbnail: icons,
+                sourceUrl: channel 
+            }}
         });
-      },
-    )
-  })
+
+        let img = await q.download?.();
+        let imgMejorada = await Escalar(img);
+
+        if (imgMejorada) {
+            const etiqueta = `🍬 Imagen mejorada para ${m.sender.split('@')[0]} .`;
+            conn.sendMessage(m.chat, { image: imgMejorada, caption: etiqueta }, { quoted: m });
+        } else {
+            return m.reply(`${msm} Ocurrió un error durante el proceso de mejora.`);
+        }
+
+    } catch {
+        return m.reply(`${msm} Ocurrió un error.`);
+    }
+};
+
+handler.help = ["remini", "hd", "enhance"];
+handler.tags = ["tools"];
+handler.register = true;
+handler.command = ["remini", "hd", "enhance"];
+export default handler;
+
+async function Escalar(imagenBuffer) {
+    try {
+        const response = await fetch("https://lexica.qewertyy.dev/upscale", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                image_data: imagenBuffer.toString("base64"),
+                format: "binary",
+            }),
+        });
+
+        return Buffer.from(await response.arrayBuffer());
+    } catch {
+        return null;
+    }
 }

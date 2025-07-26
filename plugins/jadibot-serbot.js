@@ -24,42 +24,16 @@ const { child, spawn, exec } = await import('child_process')
 const { CONNECTING } = ws
 import { makeWASocket } from '../lib/simple.js'
 import { fileURLToPath } from 'url'
+import getMensajeSistema from '../lib/msmwarning.js';
+let mensajes = getMensajeSistema();
 let crm1 = "Y2QgcGx1Z2lucy"
 let crm2 = "A7IG1kNXN1b"
 let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = `╔══════════════════════════╗
-║ ✨💥  ＳＵＫＵＮＡ -  B O T  🛶✨ 
-╠══════════════════════════╣
-║ ⟿ 💛 Utilice otro celular para escanear 
-║    este codigo 'QR' o escanea el codigo
-║    mediante una PC para convertirte en
-║    en un Sub Bot 🎉
-╟──────────────────────────╢
-║                            
-║➥ \`1\` Haga click en los ⋮ puntos
-║        en la esquina superior
-║        derecha.
-║➥ \`2\` Toca dispositivos vinculados.
-║➥ \`3\` Escanee este codigo QR para
-║         iniciar session
-╟──────────────────────────╢
-║ ⚠  Este codigo QR Expira en
-║     45 segundos
-╚══════════════════════════╝`;
-let rtx2 = ` ✨💥  ＳＵＫＵＮＡ -  B O T  🌾✨ 
-
-⟿ 💛 Usa este codigo para convertirte en Sub-Bot ☄️
-
-\`1\` Haga click en los ⋮ puntos en la esquina superior derecha.
-\`2\` Toca dispositivos vinculados.
-\`3\` Selecciona vincular con el numero de teléfono
-\`4\` Escriba el codigo.
-
-> ⚠  Este codigo solo funciona en el Numero que lo solicito.
-> ✧ No es recomendable usar tu cuenta principal.`;
+let rtx = mensajes.smsqr;
+let rtx2 = mensajes.smscode;
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -67,13 +41,14 @@ const SukunaJBOptions = {}
 if (global.conns instanceof Array) console.log()
 else global.conns = []
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
-if (!globalThis.db.data.settings[conn.user.jid].jadibotmd) {
-return m.reply(`♡ El Comando *${command}* está desactivado temporalmente.`)
-}
+if (!globalThis.db.data.settings[conn.user.jid].jadibotmd) return conn.reply(m.chat,`🌳 El Comando *${command}* está desactivado temporalmente.`, m, fake)
+
 let time = global.db.data.users[m.sender].Subs + 120000
-if (new Date - global.db.data.users[m.sender].Subs < 120000) return conn.reply(m.chat, `${emoji} Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m)
+if (new Date - global.db.data.users[m.sender].Subs < 120000) return conn.reply(m.chat, `${emoji} Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m, fake)
+
 const subBots = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])]
 const subBotsCount = subBots.length
+
 if (subBotsCount === 20) {
 return m.reply(`${emoji2} No se han encontrado espacios para *Sub-Bots* disponibles.`)
 }
@@ -234,7 +209,7 @@ sock.isInit = true
 global.conns.push(sock)
 await joinChannels(sock)
 
-m?.chat ? await conn.sendMessage(m.chat, {text: args[0] ? `@${m.sender.split('@')[0]}, ya estás conectado, leyendo mensajes entrantes...` : `╭━━〔 🤖 ¡𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾 𝙲𝙾𝙽 𝙴𝚇𝙸𝚃𝙾! 〕━━⬣  
+m?.chat ? await conn.sendMessage(m.chat, {text: args[0] ? `@${m.sender.split('@')[0]}, ya estás conectado, leyendo mensajes entrantes...` : `╭━━〔 🤖 ¡𝚂𝙾𝙲𝙺𝙴𝚃 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾! 〕━━⬣  
 ┃  
 ┃ 🌳 @${m.sender.split('@')[0]}  
 ┃ 🧩 Ya formas parte de la familia *Sub-Bots*  

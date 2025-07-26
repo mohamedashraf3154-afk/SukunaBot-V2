@@ -81,7 +81,7 @@ export async function before(m, { conn }) {
     contextInfo: {
       externalAdReply: {
         title: 'Dev.Shadow 🇦🇱',
-        body: '🌾◌*̥₊ Sukuna MD ◌❐🎋༉',
+        body: '🌾◌*̥₊ 𝑆𝑢𝑘𝑢𝑛𝑎 𝑈𝑙𝑡𝑟𝑎 𝑀𝐷 ◌❐🎋༉',
         thumbnailUrl: 'https://files.catbox.moe/mez710.jpg',
         sourceUrl: 'https://github.com/Yuji-XDev',
         mediaType: 1,
