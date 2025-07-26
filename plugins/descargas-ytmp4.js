@@ -5,14 +5,16 @@ import yts from 'yt-search';
 const handler = async (m, { conn, text, usedPrefix, command, args }) => {
   try {
     if (!text) {
-      return conn.reply(m.chat, `*Ingresa un link de YouTub'e*`, m, rcanal);
+      return conn.reply(m.chat, `🌾 *Ingresa un link de YouTub'e*`, m, rcanal);
     }
 
     m.react('⏱️');
 
     let videoInfo, urlYt;
 
-    if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(text)) {
+    const isYoutubeUrl = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(text);
+    
+    if (isYoutubeUrl) {
       const id = text.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^\s&]+)/)?.[1];
       if (!id) return m.reply(`⚠️ No se pudo extraer el ID del video.`);
 
@@ -24,7 +26,6 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       if (!search?.videos?.length) {
         return conn.reply(m.chat, `⚠️ No se encontraron resultados para: *${text}*`, m);
       }
-
       videoInfo = search.videos[0];
       urlYt = videoInfo.url;
     }
@@ -42,7 +43,6 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
     const canal = author.name || 'Desconocido';
     const vistas = views.toLocaleString('es-PE');
 
-
     const { data } = await axios.get(`https://api.stellarwa.xyz/dow/ytmp4?url=${encodeURIComponent(url)}&apikey=stellar-7SQpl4Ah`);
     if (!data?.status || !data?.data?.dl) {
       throw new Error("No se pudo obtener el enlace de descarga.");
@@ -51,7 +51,6 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
     const videoUrl = data.data.dl;
     const size = await getSize(videoUrl);
     const sizeStr = size ? await formatSize(size) : 'Desconocido';
-
 
     const textoInfo =
       ` ⬣ *🎲  \`YOUTUBE - MP4\` 🇦🇱* ⬣\n\n` +
@@ -64,11 +63,6 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       `> 🔗 *𝑳𝒊𝒏𝒌:* ${url}\n\n` +
       ` *➭ 𝑬𝒍 𝒗𝒊𝒅𝒆𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
-    /*await conn.sendMessage(m.chat, {
-      image: { url: thumbnail },
-      caption: textoInfo
-    }, { quoted: m });*/
-    
     await conn.sendMessage(m.chat, {
       image: thumbnail,
       caption: textoInfo,
@@ -82,7 +76,9 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       }
     }, { quoted: m });
 
-    await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', fkontak);
+    const videoBuffer = await fetch(videoUrl).then(res => res.buffer());
+    await conn.sendFile(m.chat, videoBuffer, `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', fkontak);
+
     m.react('✅');
 
   } catch (e) {
@@ -111,8 +107,9 @@ async function formatSize(bytes) {
 async function getSize(url) {
   try {
     const response = await axios.head(url);
-    const contentLength = response.headers['content-length'];
-    return contentLength ? parseInt(contentLength, 10) : null;
+    return response.headers['content-length']
+      ? parseInt(response.headers['content-length'], 10)
+      : null;
   } catch (error) {
     console.error("Error al obtener el tamaño:", error.message);
     return null;
