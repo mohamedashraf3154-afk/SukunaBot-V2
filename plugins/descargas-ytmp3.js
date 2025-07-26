@@ -93,7 +93,6 @@ const handler = async (m, { conn, text, command }) => {
     }
 
     const { title, timestamp, views, ago, url, author, thumbnail } = video;
-
     const canal = author?.name || 'Desconocido';
     const vistas = views.toLocaleString();
 
@@ -102,29 +101,25 @@ const handler = async (m, { conn, text, command }) => {
       + `> ⏱️ *𝑫𝒖𝒓𝒂𝒄𝒊𝒐𝒏:* ${timestamp}\n`
       + `> 🍰 *𝑪𝒂𝒏𝒂𝒍:* ${canal}\n`
       + `> 🌧️ *𝑽𝒊𝒔𝒕𝒂𝒔:* ${vistas}\n`
-      + `> 🌳 *𝑽𝒊𝒔𝒕𝒂𝒔:* ${ago}\n`
+      + `> 🌳 *𝑭𝒆𝒄𝒉𝒂:* ${ago}\n`
       + `> 🔗 *𝑳𝒊𝒏𝒌:* ${url}\n\n`
-      + ` *➭ 𝑬𝒍 𝒂𝒖𝒅𝒊𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸🌸*`;
+      + ` *➭ 𝑬𝒍 𝒂𝒖𝒅𝒊𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
     const thumbnailBuffer = await (await fetch(thumbnail)).buffer();
 
-    await conn.sendFile(
-      m.chat,
-      thumbnailBuffer,
-      'ytmp3.jpg',
-      textoInfo,
-      {
-        quoted: m,
-        contextInfo: {
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-            newsletterJid: channelRD.id,
-            newsletterName: channelRD.name,
-            serverMessageId: -1
-          }
+    const fake = {
+      quoted: m,
+      contextInfo: {
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363374826926142@newsletter',
+          newsletterName: 'ᰔ channelᩚ',
+          serverMessageId: -1
         }
       }
-    );
+    };
+
+    await conn.sendFile(m.chat, thumbnailBuffer, 'ytmp3.jpg', textoInfo, m, fake);
 
     const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
     const res = await fetch(api);
