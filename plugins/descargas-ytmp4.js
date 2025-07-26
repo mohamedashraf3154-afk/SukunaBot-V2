@@ -69,9 +69,20 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       caption: textoInfo
     }, { quoted: m });*/
     
-    await conn.sendFile(m.chat, thumbnail, 'ytmp4.jpg', textoInfo, m, fake);
+    await conn.sendMessage(m.chat, {
+      image: thumbnail,
+      caption: textoInfo,
+      contextInfo: {
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363401008003732@newsletter',
+          newsletterName: '=͟͟͞𝑆𝑢𝑘𝑢𝑛𝑎 𝑈𝑙𝑡𝑟𝑎 • 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⌺',
+          serverMessageId: -1
+        }
+      }
+    }, { quoted: m });
 
-    await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', m);
+    await conn.sendFile(m.chat, await (await fetch(videoUrl)).buffer(), `${title}.mp4`, '🖍️ 𝑨𝒒𝒖𝒊 𝒕𝒊𝒆𝒏𝒆𝒔 𝒕𝒖 𝒗𝒊𝒅𝒆𝒐, 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸', fkontak);
     m.react('✅');
 
   } catch (e) {
@@ -86,7 +97,6 @@ handler.tags = ['descargas'];
 
 export default handler;
 
-// 📦 Utilidades
 async function formatSize(bytes) {
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
   let i = 0;
