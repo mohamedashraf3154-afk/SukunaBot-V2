@@ -1,21 +1,32 @@
 const handler = async (m, { conn, args, usedPrefix, command }) => {
   try {
     let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
-    let userData = global.db.data.users[userId] || {};
-
     await m.react('📬');
 
+    const nombre = userId.split('@')[0];
 
-    const title = `╭━━━〔 *⛩ MENÚ PRINCIPAL ⛩* 〕━━⬣\n│✨ Hola @${userId.split('@')[0]}, aquí está tu menú:\n╰━━━━━━━━━━━━━━━━⬣`;
 
-    const buttonsQuick = [
+    const textoImg = `╭━━━〔 *⛩ MENÚ PRINCIPAL ⛩* 〕━━⬣\n│✨ Hola @${nombre}, aquí está tu menú visual:\n╰━━━━━━━━━━━━━━━━⬣`;
+    const thumbnail = 'https://files.catbox.moe/mez710.jpg';
+
+    const botones = [
       { buttonId: `${usedPrefix}owner`, buttonText: { displayText: '👑 Owner' }, type: 1 },
       { buttonId: `${usedPrefix}infobot`, buttonText: { displayText: '🌐 InfoBot' }, type: 1 },
       { buttonId: `${usedPrefix}estado`, buttonText: { displayText: '📊 Estado' }, type: 1 },
     ];
 
+    await conn.sendMessage(m.chat, {
+      image: { url: thumbnail },
+      caption: textoImg,
+      mentions: [userId],
+      footer: 'Sukuna Bot MD ✨',
+      buttons: botones
+    }, { quoted: m });
 
-    const sections = [
+ 
+    const textoLista = `╭━━━〔 *🧭 SECCIONES DISPONIBLES* 〕━━⬣\n│🔍 Elige una categoría del menú:\n╰━━━━━━━━━━━━━━━━⬣`;
+
+    const secciones = [
       {
         title: '🌟 Menús disponibles',
         rows: [
@@ -33,17 +44,13 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
       },
     ];
 
-    const thumbnail = 'https://files.catbox.moe/mez710.jpg';
-
     await conn.sendMessage(m.chat, {
-      image: { url: thumbnail },
-      caption: title,
+      text: textoLista,
       mentions: [userId],
       footer: 'Sukuna Bot MD ✨',
-      buttons: buttonsQuick,
       title: '📁 Menú interactivo',
-      sections,
       buttonText: '📂 Ver secciones',
+      sections: secciones,
     }, { quoted: m });
 
   } catch (e) {
