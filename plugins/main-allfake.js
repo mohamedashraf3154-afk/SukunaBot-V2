@@ -26,7 +26,7 @@ return res.data
 } catch (e) {
 console.log(`Error : ${e}`)
 }}
-  
+
 global.creador = 'wa.me/51969214380'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
 global.namechannel = '=͟͟͞Sukuna bot • 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⌺'
@@ -39,6 +39,7 @@ global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => '
 global.canalIdM = ["120363401008003732@newsletter", "120363401008003732@newsletter"]
 global.canalNombreM = ["  ꙰⃟🎄  ⸸𝕊𝖚𝖐𝖚𝖓𝖆 𝕭𝖔𝖙 𝑴𝑫⸸  🎋★꙰⃟⸙", "🐉꙰⃟ 𖠺 SUKUNA BOT - 𝐌𝐃 𖠺🌴⃟ᰳᰬᰶ"]
 global.channelRD = await getRandomChannel()
+
 
 global.d = new Date(new Date + 3600000)
 global.locale = 'es'
@@ -60,15 +61,16 @@ global.emoji4 = '(๑>ᴗ๑'
 global.emoji5 = '(◕‿◕✦'
 global.emojis = [emoji, emoji2, emoji3, emoji4, emoji5].getRandom()
 
-global.wait = '⚘𖠵⃕ＣＡＲＧＡＮＤＯ...ꪾ❍̵̤̂\n=͟͟͞⚡ 𝐴𝑔𝑢𝑎𝑟𝑑𝑒 𝑢𝑛 𝑚𝑜𝑚𝑒𝑛𝑡𝑜...';
-global.waitt = '⚘𖠵⃕ＣＡＲＧＡＮＤＯ...ꪾ❍̵̤̂\n=͟͟͞⚡ 𝐴𝑔𝑢𝑎𝑟𝑑𝑒 𝑢𝑛 𝑚𝑜𝑚𝑒𝑛𝑡𝑜...';
-global.waittt = '⚘𖠵⃕ＣＡＲＧＡＮＤＯ...ꪾ❍̵̤̂\n=͟͟͞⚡ 𝐴𝑔𝑢𝑎𝑟𝑑𝑒 𝑢𝑛 𝑚𝑜𝑚𝑒𝑛𝑡𝑜...';
-global.waitttt = '⚘𖠵⃕ＣＡＲＧＡＮＤＯ...ꪾ❍̵̤̂\n=͟͟͞⚡ 𝐴𝑔𝑢𝑎𝑟𝑑𝑒 𝑢𝑛 𝑚𝑜𝑚𝑒𝑛𝑡𝑜...';
+global.wait = '✧͢☁️ 𝐏𝐑𝐎𝐂𝐄𝐒𝐀𝐍𝐃𝐎...⚙️༄  \n=͟͟͞💠 𝑬𝒔𝒑𝒆𝒓𝒆 𝒑𝒐𝒓 𝒇𝒂𝒗𝒐𝒓...';
+global.waitt = '✧͢☁️ 𝐏𝐑𝐎𝐂𝐄𝐒𝐀𝐍𝐃𝐎...⚙️༄  \n=͟͟͞💠 𝑬𝒔𝒑𝒆𝒓𝒆 𝒑𝒐𝒓 𝒇𝒂𝒗𝒐𝒓...';
+global.waittt = '✧͢☁️ 𝐏𝐑𝐎𝐂𝐄𝐒𝐀𝐍𝐃𝐎...⚙️༄  \n=͟͟͞💠 𝑬𝒔𝒑𝒆𝒓𝒆 𝒑𝒐𝒓 𝒇𝒂𝒗𝒐𝒓...';
+global.waitttt = '✧͢☁️ 𝐏𝐑𝐎𝐂𝐄𝐒𝐀𝐍𝐃𝐎...⚙️༄  \n=͟͟͞💠 𝑬𝒔𝒑𝒆𝒓𝒆 𝒑𝒐𝒓 𝒇𝒂𝒗𝒐𝒓...';
+
 
 var canal = 'https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U'  
 var comunidad = 'https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U'
 var git = 'https://github.com/Yuji-XDev'
-var github = 'https://github.com/Yuji-XDev/Sukuna-Bot-MD'
+var github = 'https://github.com/Yuji-XDev/SukunaBot-V2'
 var tiktok = 'https://tiktok.com/@the.black.xz'
 let correo = 'blackoficial2025@gmail.com'
 global.redes = [canal, comunidad, git, github, tiktok, correo].getRandom()
@@ -90,27 +92,22 @@ global.taguser = '@' + m.sender.split("@s.whatsapp.net")
 var more = String.fromCharCode(8206)
 global.readMore = more.repeat(850)
 
-global.packsticker = `🧙‍♂️ 𝗠𝗮𝗴𝗼: ${nombre}\n🕋 𝗘𝘀𝗽𝗶𝗿𝗶𝘁𝘂: ${bot}`;
-global.packsticker2 = `\n 𑁯ᰰᘘ᷒ᰰ ༝⃟ꪆ 𝙂𝘼𝙔 𝙎𝙄 𝙇𝙊 𝙍𝙊𝘽𝘼𝙎 ༝⃟ꪆ ᘘ᷒ᰰ𑁯`
-  
+global.packsticker = `°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°\nᰔᩚ Usuario: ${nombre}\n❀ Bot: ${botname}\n✦ Fecha: ${fecha}\nⴵ Hora: ${tiempo}`;
+global.packsticker2 = `\n°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°\n\n${dev}`
+
 global.fkontak = { key: {participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: `6285600793871-1614953337@g.us` } : {}) }, message: { 'contactMessage': { 'displayName': `${nombre}`, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${nombre},;;;\nFN:${nombre},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`, 'jpegThumbnail': null, thumbnail: null,sendEphemeral: true}}}
 
-global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, newsletterName: channelRD.name, serverMessageId: -1 }
+global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: global.canalIdM, newsletterName: global.canalNombreM, serverMessageId: -1 }
 }}, { quoted: m }
 
 global.icono = [
-'https://files.catbox.moe/nmseef.png',
 'https://files.catbox.moe/4oyfem.jpg',
 'https://files.catbox.moe/bs0ecf.png',
 'https://files.catbox.moe/jp0yqi.png',
 'https://files.catbox.moe/qnvpyq.jpg'
 ].getRandom()
 
-/*global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: packname, body: dev, mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}*/
-
-
-global.rcanal = {contextInfo: {forwardingScore: 2025, isForwarded: true, externalAdReply: {title: packname, body: club, sourceUrl: redes, thumbnailUrl: icono}}}
-}
+global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: packname, body: dev, mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
 
 export default handler
 
