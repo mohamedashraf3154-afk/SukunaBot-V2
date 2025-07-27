@@ -39,7 +39,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         footer: `© ⍴᥆ᥕᥱrᥱძ ᑲᥡ sʜᴀᴅᴏᴡ•ᴄᴏʀᴇ`,
         buttons: [
           { buttonId: `${usedPrefix}ytmp3 ${url}`, buttonText: { displayText: '🎧 ᴅᴇsᴄᴀʀɢᴀʀ ᴀᴜᴅɪᴏ' }, type: 1 },
-          { buttonId: `${usedPrefix}ytmp4 ${url}`, buttonText: { displayText: '📽️ ᴅᴇsᴄᴀʀɢᴀʀ ᴠɪᴅᴇᴏ' }, type: 1 },
+          { buttonId: `${usedPrefix}ytv ${url}`, buttonText: { displayText: '📽️ ᴅᴇsᴄᴀʀɢᴀʀ ᴠɪᴅᴇᴏ' }, type: 1 },
            { buttonId: `${usedPrefix}menu`, buttonText: { displayText: 'ᴠᴏʟᴠᴇʀ ᴍᴇɴᴜ ᴅʟ' }, type: 1 },
          // { buttonId: `${usedPrefix}ytmp3doc ${url}`, buttonText: { displayText: '🌴 ᴀᴜᴅɪᴏ • ᴅᴏᴄ' }, type: 1 },
          // { buttonId: `${usedPrefix}ytmp4doc ${url}`, buttonText: { displayText: '🌳 ᴠɪᴅᴇᴏ • ᴅᴏᴄ' }, type: 1 },
