@@ -1,16 +1,15 @@
-
 import { proto } from '@whiskeysockets/baileys';
 import PhoneNumber from 'awesome-phonenumber';
 
 const handler = async (m, { conn }) => {
   const name = '𝙎𝙝𝙖𝙙𝙤𝙬 - 𝘾𝙧𝙚𝙖𝙙𝙤𝙧 👑';
-  const numCreador = '51912345678';
+  const numCreador = '51998118690';
   const empresa = 'Sukuna Bot Inc.';
   const about = '🤖 Desarrollador de Sukuna Ultra - MD';
   const correo = 'blackoficial2025@gmail.com';
   const web = 'https://gituhb.com/Yuji-XDev';
   const direccion = 'Tokyo, Japón 🇯🇵';
-  const fotoPerfil = 'https://files.catbox.moe/y43t02.jpg';
+  const fotoPerfil = 'https://files.catbox.moe/c5ahjl.jpg';
 
   const vcard = `
 BEGIN:VCARD
