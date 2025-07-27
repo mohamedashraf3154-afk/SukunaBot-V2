@@ -1,73 +1,56 @@
-// Código creado por Deylin
-// https://github.com/Deylin-eliac  
-// No quites créditos
 
+import { proto } from '@whiskeysockets/baileys';
 import PhoneNumber from 'awesome-phonenumber';
 
-let handler = async (m, { conn }) => {
-  m.react('⛩️');
-  
-const imageUrl = 'https://files.catbox.moe/y43t02.jpg'
-  const numCreador = '51988013368';
-  const ownerJid = numCreador + '@s.whatsapp.net';
-  const name = await conn.getName(ownerJid) || 'Black';
-  const about = (await conn.fetchStatus(ownerJid).catch(() => {}))?.status || `⛩️ BLACK.OFC 👻`;
-  const empresa = '⚡ THE BLACK 🍁';
+const handler = async (m, { conn }) => {
+  const name = '𝙎𝙝𝙖𝙙𝙤𝙬 - 𝘾𝙧𝙚𝙖𝙙𝙤𝙧 👑';
+  const numCreador = '51912345678';
+  const empresa = 'Sukuna Bot Inc.';
+  const about = '🤖 Desarrollador de Sukuna Ultra - MD';
+  const correo = 'blackoficial2025@gmail.com';
+  const web = 'https://gituhb.com/Yuji-XDev';
+  const direccion = 'Tokyo, Japón 🇯🇵';
+  const fotoPerfil = 'https://files.catbox.moe/y43t02.jpg';
 
   const vcard = `
 BEGIN:VCARD
 VERSION:3.0
 N:;${name};;;
 FN:${name}
-ORG:${empresa};
+ORG:${empresa}
 TITLE:CEO & Fundador
 TEL;waid=${numCreador}:${new PhoneNumber('+' + numCreador).getNumber('international')}
-EMAIL:correo@empresa.com
-URL:https://www.tuempresa.com
+EMAIL:${correo}
+URL:${web}
 NOTE:${about}
-ADR:;;Dirección de tu empresa;;;;
+ADR:;;${direccion};;;;
 X-ABADR:ES
-X-ABLabel:Dirección Web
-X-ABLabel:Correo Electrónico
-X-ABLabel:Teléfono de contacto
 X-WA-BIZ-NAME:${name}
 X-WA-BIZ-DESCRIPTION:${about}
 END:VCARD`.trim();
 
+  const contactMessage = {
+    displayName: name,
+    vcard
+  };
 
-  await conn.sendMessage(
-    m.chat,
-    {
-      contacts: {
-        displayName: name,
-        contacts: [{ vcard }]
-      },
-      contextInfo: {
-        mentionedJid: [m.sender],
-        isForwarded: true,
-        forwardingScore: 999,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: channelRD.id,
-          newsletterName: channelRD.name,
-          serverMessageId: -1,
-        },
-        externalAdReply: {
-          title: textbot,
-          body: dev,
-          thumbnailUrl: imageUrl,
-          sourceUrl: redes,
-          mediaType: 1,
-          showAdAttribution: true,
-          renderLargerThumbnail: true,
-        },
-      }
+  await conn.sendMessage(m.chat, {
+    contacts: {
+      displayName: name,
+      contacts: [contactMessage]
     },
-    { quoted: m }
-  );
-}
+    contextInfo: {
+      externalAdReply: {
+        title: '👤 Contacto del Creador',
+        body: 'Toca aquí para guardar el contacto o hablar con él',
+        mediaType: 1,
+        thumbnailUrl: fotoPerfil,
+        renderLargerThumbnail: true,
+        sourceUrl: web
+      }
+    }
+  }, { quoted: m });
+};
 
-handler.help = ['owner'];
-handler.tags = ['main'];
-handler.command = ['owner', 'creator', 'creador', 'dueño'];
-
-export default handler; 
+handler.command = ['creador', 'creator', 'owner'];
+export default handler;
