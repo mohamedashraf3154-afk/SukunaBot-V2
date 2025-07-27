@@ -13,7 +13,7 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
     let videoInfo, urlYt;
 
     const isYoutubeUrl = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(text);
-    
+
     if (isYoutubeUrl) {
       const id = text.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^\s&]+)/)?.[1];
       if (!id) return m.reply(`⚠️ No se pudo extraer el ID del video.`);
@@ -64,7 +64,7 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
       ` *➭ 𝑬𝒍 𝒗𝒊𝒅𝒆𝒐 𝒔𝒆 𝒆𝒔𝒕𝒂 𝒆𝒏𝒗𝒊𝒂𝒏𝒅𝒐, 𝑬𝒔𝒑𝒆𝒓𝒆 𝒖𝒏 𝒎𝒐𝒎𝒆𝒏𝒕𝒊𝒕𝒐 𝒐𝒏𝒊𝒄𝒉𝒂𝒏~ 🌸*`;
 
     await conn.sendMessage(m.chat, {
-      image: thumbnail,
+      image: { url: thumbnail },
       caption: textoInfo,
       contextInfo: {
         isForwarded: true,
