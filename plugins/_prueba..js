@@ -1,10 +1,10 @@
 import pkg from '@whiskeysockets/baileys';
-const { generateWAMessageFromContent, proto } = pkg;
-import fetch from 'node-fetch';
+const { generateWAMessageFromContent, proto, getContentType } = pkg;
 import { xpRange } from '../lib/levelling.js';
+import fetch from 'node-fetch';
 
 let handler = async (m, { conn, args }) => {
-  let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
+  let userId = m.mentionedJid?.[0] || m.sender;
   let userData = global.db.data.users[userId] || {};
   let exp = userData.exp || 0;
   let coin = userData.coin || 0;
@@ -15,9 +15,10 @@ let handler = async (m, { conn, args }) => {
   let _uptime = process.uptime() * 1000;
   let uptime = clockString(_uptime);
   let totalreg = Object.keys(global.db.data.users).length;
-  let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length;
+  let totalCommands = Object.values(global.plugins).filter(v => v.help && v.tags).length;
 
   const canalUrl = 'https://whatsapp.com/channel/0029VawF8fBBvvsktcInIz3m';
+  const headerImageUrl = 'https://files.catbox.moe/mez710.jpg';
 
   const text = `✨ Pulsa el botón para unirte al canal oficial
 
@@ -30,6 +31,10 @@ let handler = async (m, { conn, args }) => {
 │ ✦ Comandos: ${totalCommands}
 │ ✦ Uptime: ${uptime}
 ╰───────────────⬣`;
+
+  const imgBuffer = await (await fetch(headerImageUrl)).buffer();
+  const mediaMsg = await conn.prepareMessageMedia({ image: imgBuffer }, { upload: conn.waUploadToServer });
+
 
   const msg = generateWAMessageFromContent(m.chat, {
     viewOnceMessage: {
@@ -46,7 +51,8 @@ let handler = async (m, { conn, args }) => {
             text: 'Sukuna Bot MD'
           }),
           header: proto.Message.InteractiveMessage.Header.create({
-            hasMediaAttachment: false
+            hasMediaAttachment: true,
+            imageMessage: mediaMsg.imageMessage
           }),
           nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
             buttons: [
@@ -82,9 +88,9 @@ let handler = async (m, { conn, args }) => {
   await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
 };
 
-handler.help = ['menup'];
+handler.help = ['menu'];
 handler.tags = ['main'];
-handler.command = ['menup'];
+handler.command = ['menu', 'menú', 'help', 'allmenu', 'menucompleto'];
 export default handler;
 
 function clockString(ms) {
