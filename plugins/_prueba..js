@@ -1,58 +1,51 @@
 import pkg from '@whiskeysockets/baileys';
-const { generateWAMessageFromContent, proto, getContentType } = pkg;
-import { xpRange } from '../lib/levelling.js';
+const { generateWAMessageFromContent, prepareWAMessageMedia, proto } = pkg;
 import fetch from 'node-fetch';
+import { xpRange } from '../lib/levelling.js';
 
 let handler = async (m, { conn, args }) => {
   let userId = m.mentionedJid?.[0] || m.sender;
   let userData = global.db.data.users[userId] || {};
-  let exp = userData.exp || 0;
-  let coin = userData.coin || 0;
-  let level = userData.level || 0;
-  let role = userData.role || 'Sin Rango';
-
+  let { exp = 0, level = 0, role = 'Sin Rango' } = userData;
   let name = await conn.getName(userId);
-  let _uptime = process.uptime() * 1000;
-  let uptime = clockString(_uptime);
-  let totalreg = Object.keys(global.db.data.users).length;
+  let uptime = clockString(process.uptime() * 1000);
+  let totalUsers = Object.keys(global.db.data.users).length;
   let totalCommands = Object.values(global.plugins).filter(v => v.help && v.tags).length;
 
   const canalUrl = 'https://whatsapp.com/channel/0029VawF8fBBvvsktcInIz3m';
-  const headerImageUrl = 'https://files.catbox.moe/mez710.jpg';
+  const imagenUrl = 'https://i.imgur.com/JP52fdP.jpeg'; // cambia por la imagen que quieras
 
-  const text = `✨ Pulsa el botón para unirte al canal oficial
+  // preparamos la imagen como header
+  const media = await prepareWAMessageMedia(
+    { image: { url: imagenUrl }, jpegThumbnail: null },
+    { upload: conn.waUploadToServer }
+  );
+
+  const text = `✨ Pulsa un botón para acceder
 
 ╭─「 👑 Sukuna Bot 」─⬣
 │ ✦ Usuario: ${name}
 │ ✦ Nivel: ${level}
 │ ✦ EXP: ${exp}
 │ ✦ Rango: ${role}
-│ ✦ Usuarios registrados: ${totalreg}
+│ ✦ Usuarios: ${totalUsers}
 │ ✦ Comandos: ${totalCommands}
 │ ✦ Uptime: ${uptime}
 ╰───────────────⬣`;
 
-  const imgBuffer = await (await fetch(headerImageUrl)).buffer();
-  const mediaMsg = await conn.prepareMessageMedia({ image: imgBuffer }, { upload: conn.waUploadToServer });
-
-
   const msg = generateWAMessageFromContent(m.chat, {
     viewOnceMessage: {
       message: {
-        messageContextInfo: {
-          deviceListMetadata: {},
-          deviceListMetadataVersion: 2
-        },
+        messageContextInfo: { deviceListMetadata: {}, deviceListMetadataVersion: 2 },
         interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: 'Sukuna Bot MD'
-          }),
+          body: proto.Message.InteractiveMessage.Body.create({ text }),
+          footer: proto.Message.InteractiveMessage.Footer.create({ text: 'Sukuna Bot MD' }),
           header: proto.Message.InteractiveMessage.Header.create({
             hasMediaAttachment: true,
-            imageMessage: mediaMsg.imageMessage
+            imageMessage: media.imageMessage,
+            title: '🌴 Sukuna Bot Oficial',
+            subtitle: '⛩️ ¡Bienvenido guerrero!',
+            hasMediaAttachment: true
           }),
           nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
             buttons: [
@@ -91,11 +84,12 @@ let handler = async (m, { conn, args }) => {
 handler.help = ['menup'];
 handler.tags = ['main'];
 handler.command = ['menup'];
-export default handler;
 
 function clockString(ms) {
-  let h = Math.floor(ms / 3600000);
-  let m = Math.floor((ms % 3600000) / 60000);
-  let s = Math.floor((ms % 60000) / 1000);
+  const h = Math.floor(ms/3600000);
+  const m = Math.floor((ms%3600000)/60000);
+  const s = Math.floor((ms%60000)/1000);
   return `${h}H ${m}M ${s}S`;
 }
+
+export default handler;
