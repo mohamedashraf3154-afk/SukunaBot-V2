@@ -2,10 +2,9 @@ import fs from 'fs'
 
 let handler = async (m, { conn }) => {
   try {
-    m.reply(`╭─╼⃝🔁 *REINICIANDO BOT* 🔧
-┃
-┃ ⚙️ Reiniciando el sistema...
-┃ 🕐 Espera unos segundos por favor.
+    m.reply(`╭─〘 ⚙️ SISTEMA ONLINE 〙
+┃ ⚽ Ya estoy activo nuevamente
+┃ 🙌 Gracias por esperar
 ╰━⬣`)
 
     fs.writeFileSync('./restarting.txt', m.chat)
