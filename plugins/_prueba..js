@@ -88,9 +88,9 @@ let handler = async (m, { conn, args }) => {
   await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
 };
 
-handler.help = ['menu'];
+handler.help = ['menup'];
 handler.tags = ['main'];
-handler.command = ['menu', 'menú', 'help', 'allmenu', 'menucompleto'];
+handler.command = ['menup'];
 export default handler;
 
 function clockString(ms) {
