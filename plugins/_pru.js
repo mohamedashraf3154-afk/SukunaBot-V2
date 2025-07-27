@@ -30,16 +30,16 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
       {
         title: '🌟 Menús disponibles',
         rows: [
-          { title: "🎵 Audios", rowId: `${usedPrefix}audios`, description: "Efectos de sonido divertidos" },
-          { title: "📚 Menú completo", rowId: `${usedPrefix}menu2`, description: "Lista completa de comandos" },
-          { title: "🛠️ Herramientas", rowId: `${usedPrefix}tools`, description: "Convertidores, generadores, etc." },
+          { title: "🎵 Audios", rowId: `${usedPrefix}menu2`, description: "Efectos de sonido divertidos" },
+          { title: "📚 Menú completo", rowId: `${usedPrefix}menu`, description: "Lista completa de comandos" },
+          { title: "🛠️ Herramientas", rowId: `${usedPrefix}menudl`, description: "Convertidores, generadores, etc." },
         ],
       },
       {
         title: "💎 Premium y otros",
         rows: [
-          { title: "🧩 Premium", rowId: `${usedPrefix}menuprem`, description: "Comandos premium" },
-          { title: "📥 Descargas", rowId: `${usedPrefix}descargas`, description: "YouTube, TikTok, Facebook..." },
+          { title: "🧩 Premium", rowId: `${usedPrefix}menu18`, description: "Comandos premium" },
+          { title: "📥 Descargas", rowId: `${usedPrefix}menudl`, description: "YouTube, TikTok, Facebook..." },
         ],
       },
     ];
