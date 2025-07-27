@@ -22,13 +22,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const url = videoInfo.url || '';
     const thumbnail = videoInfo.thumbnail || null;
 
-    const body = `✿✨ *Titulo:* ${title}
-
-˖✿🕰️ *Duracion:* ${duration}
-˖✿📊 *Vistas:* ${views}
-˖✿🎤 *Canal:* ${canal}
-˖✿📅 *Publicado:* ${ago}
-˖✿🔗 *Link:* ${url}`;
+    const body = `╭━〔 *🌟 𝙔𝙊𝙐𝙏𝙐𝘽𝙀 - 𝙈𝙐́𝙎𝙄𝘾𝘼 🎶* 〕━⬣
+╰⊱🎵 *Título:* ${title}
+╰⊱⏳ *Duración:* ${duration}
+╰⊱📈 *Vistas:* ${views}
+╰⊱🎙️ *Canal:* ${canal}
+╰⊱📆 *Publicado:* ${ago}
+╰⊱🔗 *Enlace:* ${url}
+╰━━━⬣`;
 
     await conn.sendMessage(
       m.chat,
