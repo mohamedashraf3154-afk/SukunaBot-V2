@@ -43,7 +43,7 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
     const canal = author.name || 'Desconocido';
     const vistas = views.toLocaleString('es-PE');
 
-    const { data } = await axios.get(`https://api.stellarwa.xyz/dow/ytmp4?url=${encodeURIComponent(url)}&apikey=stellar-7SQpl4Ah`);
+    const { data } = await axios.get(`https://api.stellarwa.xyz/dow/ytmp4?url=${encodeURIComponent(url)}&apikey=estelar-ReKwdxiR`);
     if (!data?.status || !data?.data?.dl) {
       throw new Error("No se pudo obtener el enlace de descarga.");
     }

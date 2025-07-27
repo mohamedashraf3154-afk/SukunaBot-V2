@@ -45,7 +45,7 @@ const handler = async (m, { conn, text, command }) => {
     }, { quoted: m });
 
 
-    const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=stellar-7SQpl4Ah`;
+    const api = `https://api.stellarwa.xyz/dow/ytmp3?url=${url}&apikey=estelar-ReKwdxiR`;
     const res = await fetch(api);
     const json = await res.json();
 
