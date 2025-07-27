@@ -5,31 +5,29 @@ let handler = async (m, { conn, args }) => {
   let coin = userData.coin || 0;
   let level = userData.level || 0;
   let role = userData.role || 'Sin Rango';
-
   let name = await conn.getName(userId);
+
   let _uptime = process.uptime() * 1000;
   let uptime = clockString(_uptime);
   let totalreg = Object.keys(global.db.data.users).length;
   let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length;
 
-  
-  let videoUrl = 'https://files.catbox.moe/zsc2fq.mp4';
-  let menuText = `🍭 Bienvendo A sukuna MD
-  
+  let menuText = `
+🍭 Bienvenido a 𝑺𝒖𝒌𝒖𝒏𝒂 𝑴𝑫
+
 ╭─「 👑 𝑺𝒖𝒌𝒖𝒏𝒂 𝑩𝒐𝒕 𝑴𝒆𝒏𝒖 」─⬣
-│ ✦ 𝗨𝘀𝘂𝗮𝗿𝗶𝗼: ${name}
-│ ✦ 𝗡𝗶𝘃𝗲𝗹: ${level}
-│ ✦ 𝗘𝑿𝑷:  ${exp}
-│ ✦ 𝗥𝗮𝗻𝗴𝗼: ${role}
-│ ✦ 𝗣𝗿𝗼𝗴𝗿𝗲𝘀𝗼: [██████████]
+│ ✦ Usuario: ${name}
+│ ✦ Nivel: ${level}
+│ ✦ EXP: ${exp}
+│ ✦ Rango: ${role}
+│ ✦ Progreso: [██████████]
 ├───────────────────⬣
-│ ✦ 𝗠𝗼𝗱𝗼: 🔒 Privado
-│ ✦ 𝗖𝗿𝗲𝗮𝗱𝗼𝗿: +51969214380
-│ ✦ 𝗕𝗼𝘁: ${(conn.user.jid == global.conn.user.jid ? '👑 `𝐁𝐎𝐓 𝐎𝐅𝐈𝐂𝐈𝐀𝐋`' : '🪄 `𝐒𝐔𝐁 𝐁𝐎𝐓`')}
-│ ✦ 𝗖𝗼𝗺𝗮𝗻𝗱𝗼𝘀: ${totalCommands}
-│ ✦ 𝗨𝘀𝘂𝗮𝗿𝗶𝗼𝘀: ${totalreg}
-│ ✦ 𝗧𝗶𝗲𝗺𝗽𝗼 𝗮𝗰𝘁𝗶𝘃𝗼:
-│ ✦ *${uptime}*
+│ ✦ Modo: 🔒 Privado
+│ ✦ Creador: +51969214380
+│ ✦ Bot: ${(conn.user.jid == global.conn.user.jid ? '👑 BOT OFICIAL' : '🪄 SUB BOT')}
+│ ✦ Comandos: ${totalCommands}
+│ ✦ Usuarios: ${totalreg}
+│ ✦ Tiempo activo: ${uptime}
 ╰─⬣͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
 ͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
 𝙇𝙄𝙎𝙏 - 𝘿𝙀 - 𝘾𝙊𝙈𝘼𝙉𝘿𝙊𝙎
@@ -660,33 +658,10 @@ let handler = async (m, { conn, args }) => {
 ര ׄ 🌪️˚ #tts2
 ┗━━━━━━━━━━━━━━━━━━━━
 
-𖤐     ${club}    𖤐
-`.trim();
+𖤐     ${club}    𖤐`.trim();
 
-  await conn.sendMessage(m.chat, {
-    video: { url: videoUrl },
-    caption: menuText,
-    gifPlayback: true,
-    contextInfo: {
-      mentionedJid: [m.sender, userId],
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363401008003732@newsletter',
-        newsletterName: '⛩️ SUKUNA BOT MD 🌴',
-        serverMessageId: -1,
-      },
-      forwardingScore: 999,
-      externalAdReply: {
-        title: bot,
-        body: club,
-        mediaType: 2,
-        mediaUrl: redes,
-        sourceUrl: logo,
-        showAdAttribution: true,
-        renderLargerThumbnail: true,
-      },
-    }
-  }, { quoted: m });
+  await conn.reply(m.chat, menuText, fkontak);
+  await m.react('🌳');
 };
 
 handler.help = ['menu'];
