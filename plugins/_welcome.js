@@ -74,7 +74,8 @@ export async function before(m, { conn, participants, groupMetadata }) {
   const chat = global.db.data.chats[m.chat];
   const txt = `▧▧▧ 𝚆𝙴𝙻𝙲𝙾𝙼𝙴 :: SYSTEM ONLINE ▧▧▧`;
   const txt1 = `▧▧▧ 𝙎𝙃𝙐𝙏𝙏𝙄𝙉𝙂 𝘿𝙊𝙒𝙉 :: USER LEFT ▧▧▧`;
-
+   
+  let redes = ' https://gituh.com/Yuji-XDev';
   let groupSize = participants.length;
   if (m.messageStubType == WAMessageStubType.GROUP_PARTICIPANT_ADD) groupSize++;
   else if (
