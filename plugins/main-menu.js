@@ -661,12 +661,23 @@ let handler = async (m, { conn, args }) => {
 
 𖤐     ${club}    𖤐`.trim();
   let sukunaurl = 'https://files.catbox.moe/4kpxfk.png';
-  
- // await conn.reply(m.chat, menuText, fkontak, fake);
   await m.react('🌳');
+//await conn.sendFile(m.chat, sukunaurl, 'menu.jpg', menuText, fkontak, fake);
 //};
-await conn.sendFile(m.chat, sukunaurl, 'menu.jpg', menuText, fkontak, fake);
-};
+
+
+    await conn.sendMessage(m.chat, {
+      image: sukunaurl,
+      caption: menuText,
+      contextInfo: {
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363401008003732@newsletter',
+          newsletterName: '=͟͟͞𝑆𝑢𝑘𝑢𝑛𝑎 𝑈𝑙𝑡𝑟𝑎 • 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⌺',
+          serverMessageId: -1
+        }
+      }
+    }, { quoted: fkontak });
 
 handler.help = ['menu'];
 handler.tags = ['main'];
