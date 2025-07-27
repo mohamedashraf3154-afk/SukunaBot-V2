@@ -2,7 +2,7 @@ import yts from 'yt-search';
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `*❗ Ingresa un título para buscar en YouTube.*`, m, rcanal);
+    return conn.reply(m.chat, `*༄❖ Invoca un título para buscar en el reino de YouTube...*`, m, fake);
   }
 
   try {
@@ -22,8 +22,9 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const url = videoInfo.url || '';
     const thumbnail = videoInfo.thumbnail || null;
 
-    const body = `╭  ✦ \`\`\`Result Play\`\`\` ✦  ╮  
-˖✿✨ *Titulo:* ${title}
+    const body = `
+✿✨ *Titulo:* ${title}
+
 ˖✿🕰️ *Duracion:* ${duration}
 ˖✿📊 *Vistas:* ${views}
 ˖✿🎤 *Canal:* ${canal}
@@ -38,9 +39,10 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         footer: `© ⍴᥆ᥕᥱrᥱძ ᑲᥡ sʜᴀᴅᴏᴡ•ᴄᴏʀᴇ`,
         buttons: [
           { buttonId: `${usedPrefix}ytmp3 ${url}`, buttonText: { displayText: '🎧 ᴅᴇsᴄᴀʀɢᴀʀ ᴀᴜᴅɪᴏ' }, type: 1 },
-          { buttonId: `${usedPrefix}ytmp4 ${url}`, buttonText: { displayText: '📽️ ᴅᴇsᴄᴀʀɢᴀʀ ᴠɪᴅᴇ' }, type: 1 },
-          { buttonId: `${usedPrefix}ytmp3doc ${url}`, buttonText: { displayText: '🌴 ᴀᴜᴅɪᴏ • ᴍᴘ3 ᴅᴏᴄ' }, type: 1 },
-          { buttonId: `${usedPrefix}ytmp4doc ${url}`, buttonText: { displayText: '🌴 ᴀᴜᴅɪᴏ • ᴍᴘ4 ᴅᴏᴄ' }, type: 1 },
+          { buttonId: `${usedPrefix}ytmp4 ${url}`, buttonText: { displayText: '📽️ ᴅᴇsᴄᴀʀɢᴀʀ ᴠɪᴅᴇᴏ' }, type: 1 },
+           { buttonId: `${usedPrefix}menu`, buttonText: { displayText: 'ᴠᴏʟᴠᴇʀ ᴍᴇɴᴜ ᴅʟ' }, type: 1 },
+          { buttonId: `${usedPrefix}ytmp3doc ${url}`, buttonText: { displayText: '🌴 ᴀᴜᴅɪᴏ • ᴅᴏᴄ' }, type: 1 },
+          { buttonId: `${usedPrefix}ytmp4doc ${url}`, buttonText: { displayText: '🌳 ᴠɪᴅᴇᴏ • ᴅᴏᴄ' }, type: 1 },
         ],
         viewOnce: true,
         headerType: 4,
@@ -55,7 +57,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 };
 
-handler.command = ['play3'];
+handler.command = ['play'];
 handler.tags = ['descargas'];
 handler.limit = 6;
 
