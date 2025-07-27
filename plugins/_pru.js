@@ -33,7 +33,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
       },
     ];
 
-    const thumbnail = 'https://i.imgur.com/BzZ1eXr.jpg';
+    const thumbnail = 'https://files.catbox.moe/mez710.jpg';
 
     await conn.sendMessage(m.chat, {
       image: { url: thumbnail },
