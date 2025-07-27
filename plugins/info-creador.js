@@ -3,7 +3,7 @@ import PhoneNumber from 'awesome-phonenumber';
 
 const handler = async (m, { conn }) => {
   const name = '𝙎𝙝𝙖𝙙𝙤𝙬 - 𝘾𝙧𝙚𝙖𝙙𝙤𝙧 👑';
-  const numCreador = '51998118690';
+  const numCreador = '51988013368';
   const empresa = 'Sukuna Bot Inc.';
   const about = '🤖 Desarrollador de Sukuna Ultra - MD';
   const correo = 'blackoficial2025@gmail.com';
