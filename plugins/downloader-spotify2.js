@@ -13,13 +13,13 @@ let handler = async (m, { conn, args, command, usedPrefix }) => {
 
   await m.react('💻');
 
-  await m.reply(
+ /* await m.reply(
     `┌──〔 🔍 𝙎𝙐𝘽𝙎𝙔𝙎𝙏𝙀𝙈 𝘼𝘾𝙏𝙄𝙑𝙀 〕──┐
 │ 📡 Buscando en redes oscuras . . .
 │ 💾 Término: ${text}
 │ ⏳ Descifrando resultados...
 └────────────────────────────┘`
-  );
+  );*/
 
   try {
     const res = await fetch(`https://api.nekorinn.my.id/downloader/spotifyplay?q=${encodeURIComponent(text)}`);
@@ -37,7 +37,7 @@ let handler = async (m, { conn, args, command, usedPrefix }) => {
     const { title, artist, duration, cover, url } = json.result.metadata;
     const audio = json.result.downloadUrl;
 
-    await conn.sendMessage(m.chat, {
+    /*await conn.sendMessage(m.chat, {
       image: { url: cover },
       caption: 
 `┌─〔 𝙈𝙀𝙏𝘼𝘿𝘼𝙏𝘼 𝘿𝙀 𝙇𝘼 𝘾𝘼𝙉𝘾𝙄Ó𝙉 〕─┐
@@ -46,7 +46,7 @@ let handler = async (m, { conn, args, command, usedPrefix }) => {
 │ ⏱️ 𝘿𝙪𝙧𝙖𝙘𝙞ó𝙣: ${duration}
 │ 🌐 𝙎𝙥𝙤𝙩𝙞𝙛𝙮: ${url}
 └────〔 𝙎𝙪𝙠𝙪𝙣𝙖_𝙎𝙮𝙨𝙩𝙚𝙢 🌳〕────┘`
-    }, { quoted: m });
+    }, { quoted: m });*/
 
     await m.reply(
       `📥 𝗗𝗘𝗦𝗖𝗔𝗥𝗚𝗔 𝗘𝗡 𝗖𝗨𝗥𝗦𝗢...
