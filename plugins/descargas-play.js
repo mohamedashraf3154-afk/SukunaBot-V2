@@ -50,20 +50,26 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     await conn.reply(m.chat, infoMessage, m, JT);
 
-
     if (command === 'mp3' || command === 'playaudio') {
       try {
-
         const apiAudioUrl = `https://dark-core-api.vercel.app/api/download/YTMP3?key=api&url=${url}`;
         const res = await fetch(apiAudioUrl);
         const json = await res.json();
-        const { title, dl } = json.data;
 
-        if (!dl) throw new Error('No se generó el enlace de audio.');
+        if (!json.status || !json.download) {
+          throw new Error('❌ No se pudo obtener el audio.');
+        }
+
+        const audioTitle = json.title || 'audio';
+        const audioUrl = json.download;
 
         await conn.sendMessage(
           m.chat,
-          { audio: { url: dl }, fileName: `${title}.mp3`, mimetype: 'audio/mpeg' },
+          {
+            audio: { url: audioUrl },
+            fileName: `${audioTitle}.mp3`,
+            mimetype: 'audio/mpeg'
+          },
           { quoted: m }
         );
       } catch (e) {
@@ -71,7 +77,6 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         return conn.reply(m.chat, '⚠️ No se pudo enviar el audio. Puede que sea muy pesado o haya fallado la descarga. Intenta más tarde.', m);
       }
     }
-
 
     else if (command === 'mp4' || command === 'playvideo') {
       try {
