@@ -660,7 +660,7 @@ let handler = async (m, { conn, args }) => {
 
 𖤐     ${club}    𖤐`.trim();
 
-  await conn.reply(m.chat, menuText, fkontak);
+  await conn.reply(m.chat, menuText, m, fake);
   await m.react('🌳');
 };
 
