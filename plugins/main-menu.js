@@ -660,9 +660,12 @@ let handler = async (m, { conn, args }) => {
 ┗━━━━━━━━━━━━━━━━━━━━
 
 𖤐     ${club}    𖤐`.trim();
-
-  await conn.reply(m.chat, menuText, fkontak, fake);
+  let sukunaurl = 'https://files.catbox.moe/4kpxfk.png';
+  
+ // await conn.reply(m.chat, menuText, fkontak, fake);
   await m.react('🌳');
+//};
+await conn.sendFile(m.chat, sukunaurl, 'menu.jpg', menuText, fkontak, fake);
 };
 
 handler.help = ['menu'];
