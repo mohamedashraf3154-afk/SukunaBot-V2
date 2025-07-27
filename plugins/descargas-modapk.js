@@ -5,16 +5,19 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
 
   try {
     await m.react(rwait);
-    conn.reply(m.chat, `\`🍰 Descargando su aplicación, espere un momento...\``, m, rcanal);
+    conn.reply(m.chat, `\`🍰 Descargando su aplicación...\``, m, rcanal);
 
     let searchA = await search(text);
     let data5 = await download(searchA[0].id);
 
-    let txt = `*乂  APTOIDE - DESCARGAS* 乂\n\n`;
-    txt += `☁️ *Nombre* : ${data5.name}\n`;
-    txt += `🔖 *Package* : ${data5.package}\n`;
-    txt += `🚩 *Update* : ${data5.lastup}\n`;
-    txt += `⚖ *Peso* : ${data5.size}`;
+    let txt = `╔═━「 *🌟 APTOIDE INFO* 」━═╗\n`;
+    txt += `║\n`;
+    txt += `║ 📌 *Nombre:* ${data5.name}\n`;
+    txt += `║ 🧩 *Paquete:* ${data5.package}\n`;
+    txt += `║ 🕒 *Actualización:* ${data5.lastup}\n`;
+    txt += `║ 📁 *Peso:* ${data5.size}\n`;
+    txt += `║\n`;
+    txt += `╚═━「 🧿 𝘽𝙔 𝙎𝙐𝙆𝙐𝙉𝘼 𝘽𝙊𝙏 」━═╝`;
 
     await conn.sendFile(m.chat, data5.icon, 'thumbnail.jpg', txt, m);
     await m.react(done);
@@ -24,13 +27,11 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
       return await conn.reply(m.chat, `⚠️ El archivo es demasiado pesado.`, m);
     }
 
-    const caption = `*${data5.name}*\n> ${club}`;
-
     await conn.sendMessage(m.chat, {
       document: { url: data5.dllink },
       fileName: `${data5.name}.apk`,
       mimetype: 'application/vnd.android.package-archive',
-      caption,
+      caption: club,
       thumbnail: data5.icon,
       contextInfo: {
         externalAdReply: {
